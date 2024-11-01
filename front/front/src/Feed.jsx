@@ -14,7 +14,7 @@ const Feed = () => {
     description: '',
     image: null,
   });
-  const [preview, setPreview] = useState(null); 
+  const [preview, setPreview] = useState(null);
 
   const loadPosts = async () => {
     try {
@@ -41,8 +41,6 @@ const Feed = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, image: file });
-
-  
     const imageUrl = URL.createObjectURL(file);
     setPreview(imageUrl);
   };
@@ -86,12 +84,25 @@ const Feed = () => {
           <input type="text" name="title" placeholder="Título" onChange={handleInputChange} required />
           <input type="text" name="age" placeholder="Idade" onChange={handleInputChange} required />
           <input type="text" name="gender" placeholder="Gênero" onChange={handleInputChange} required />
-          <textarea name="description" placeholder="Descrição" onChange={handleInputChange} required></textarea>
+          <textarea name="description" placeholder="Sobre..." onChange={handleInputChange} required></textarea>
           
           {/* Pré-visualização da imagem */}
           {preview && <img src={preview} alt="Preview" className="image-preview" />}
           
-          <input className="image-selected" type="file" name="image" accept="image/jpeg" onChange={handleFileChange} required />
+          <label htmlFor="file-upload" className="image-upload-label">
+            Selecione uma imagem
+          </label>
+          <input
+            id="file-upload"
+            className="image-selected"
+            type="file"
+            name="image"
+            accept="image/jpeg"
+            onChange={handleFileChange}
+            required
+            style={{ display: "none" }} 
+          />
+          
           <button type="submit">Enviar</button>
         </form>
       )}
